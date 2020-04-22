@@ -1,0 +1,66 @@
+body {
+    background: #fff;
+}
+
+nav {
+   margin-bottom: 15px;
+}
+
+.font-custom {
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.colSize {
+    width: 500px;
+    height: 300px;
+}
+
+th {
+    vertical-align: middle;
+    /*text-align: center;*/
+}
+
+/*td {*/
+/*    vertical-align: middle;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.pagLinks {*/
+/*    margin-top: 15px;*/
+/*    !*padding-top: 20px;*!*/
+/*}*/
+
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    /*background-color: #3490dc;*/
+    /*border-color: #3490dc;*/
+    background-color: #1b1e21;
+    border-color: #1b1e21;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    /*color: #3490dc;*/
+    color: #1b1e21;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.page-link:hover {
+    z-index: 2;
+    /*color: #1d68a7;*/
+    color: #f8f9fa;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+

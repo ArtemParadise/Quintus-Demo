@@ -1,0 +1,36 @@
+.pagin {
+    margin-top: 10px;
+}
+
+.image-slider {
+    margin-bottom: 10px;
+}
+
+/*.btn {*/
+/*    margin-bottom: 5px;*/
+/*}*/
+
+.btn-outline-info, .btn-outline-danger {
+    margin-bottom: 5px;
+}
+
+.btn-createS {
+    margin-top: 15px;
+    /*padding-top: 15px;*/
+}
+
+.form-check {
+    margin-bottom: 15px;
+}
+
+.table > tbody > tr > td {
+    vertical-align: center;
+}
+
+.align-center {
+    vertical-align: center !important;
+}
+
+.flex-fill {
+    flex:1 1 auto;
+}
