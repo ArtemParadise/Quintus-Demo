@@ -64,7 +64,9 @@
                 </div>
             </div>
         </div>
-        <form method="POST" action="php/contact_mail.php" class="container wow fadeInUp animated mt_contact_animated" id="contact01_form" novalidate="novalidate">
+        <form method="POST" action="{{ route('sendContact') }}" class="container wow fadeInUp animated mt_contact_animated" id="contact01_form" novalidate="novalidate">
+            @csrf
+            {{ csrf_field() }}
             <div class="content mt_margin_left_30_negativ mt_margin_right_0 mt_contact_align_center row">
                 <div class="col-md-6 first_set_inputs">
                     <div class="first_name_input">

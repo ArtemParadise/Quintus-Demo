@@ -34,6 +34,9 @@ Route::get('/single', 'Quintus\SinglePageController@index')->name('singlePage');
 Route::get('/contact', 'Quintus\ContactPageController@index')->name('contactPage');
 Route::get('/blog', 'Quintus\BlogPageController@index')->name('blogPage');
 
+//Send contact form
+Route::post('contact/send', 'Quintus\Ajax\ContactFormController@sendMessage')->name('sendContact');
+
 
 
 Auth::routes();

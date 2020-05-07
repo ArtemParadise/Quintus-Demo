@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Quintus;
 
 use App\Http\Controllers\Controller;
-use App\Slider;
+use App\Model\Slider;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
