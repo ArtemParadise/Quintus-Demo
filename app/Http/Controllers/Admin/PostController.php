@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Category;
 use App\Model\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -54,7 +55,7 @@ class PostController extends Controller
 
         $post->category_id = $request->category_id;
 
-        if( isset($request->file)) {
+        if ($request->file('img')) {
             $path = Storage::putFile('public', $request->file('img'));
             $url = Storage::url($path);
             $post->img = $url;
@@ -123,7 +124,7 @@ class PostController extends Controller
 
         $post->category_id = $request->category_id;
 
-        if( isset($request->file)) {
+        if ($request->file('img')) {
             $path = Storage::putFile('public', $request->file('img'));
             $url = Storage::url($path);
             $post->img = $url;
