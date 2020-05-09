@@ -15,7 +15,26 @@
 {{--                        <a class="nav-link" href="/admin/slider">Slider panel</a>--}}
 {{--                    </li>--}}
 {{--                </ul>--}}
-                @yield('active')
+{{--                @yield('active')--}}
+
+                    {{--  navs  --}}
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link " href="/admin">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/admin/slider">Slider panel</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/admin/brandwall">Brand Wall panel</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/admin/posts">Post panel</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/admin/categories">Categories panel</a>
+                        </li>
+                    </ul>
             </div>
         </div>
 

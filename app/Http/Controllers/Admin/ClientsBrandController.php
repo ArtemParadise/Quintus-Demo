@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Model\Slider;
+use App\Http\Controllers\Controller;
+use App\Model\ClientsBrandWall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class SliderController extends Controller
+class ClientsBrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,14 +22,10 @@ class SliderController extends Controller
 
     public function index()
     {
-        // TODO добавить разделение на активные и неактивные слайдеры
+        $brands = ClientsBrandWall::orderBy('updated_at', 'desc')->paginate(5);
 
-        $sliders = Slider::orderBy('sliders.updated_at', 'desc')->paginate(4) ;
-
-        return view('admin.slider.sliderPanel', compact('sliders'));
+        return view('admin.clients.clients_panel', ['brands' => $brands]);
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +34,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('admin.slider.createSlider');
+        return view('admin.clients.createBrandWall');
     }
 
     /**
@@ -48,22 +45,30 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $slider = new Slider();
+        $request->validate([
+            'title' => 'required|unique:clients_brand_walls|max:255',
+            'img' => 'required|image',
+            'priority' => 'integer|max:10'
+        ]);
 
-        $slider->title = $request->title;
+        $brand = new ClientsBrandWall();
+
+        $brand->title = $request->title;
+        $brand->priority = $request->priority;
 
         $path = Storage::putFile('public', $request->file('img'));
         $url = Storage::url($path);
-        $slider->img = $url;
 
-        if ($request->checkbox) {
-            $slider->active = true;
+        $brand->img = $url;
+
+        if( $request->checkbox) {
+            $brand->active = true;
         } else {
-            $slider->active = false;
+            $brand->active = false;
         }
 
-        $slider->save();
-        return redirect()->route('sliderPanel')->with('success', 'Slider created successfully!');
+        $brand->save();
+        return redirect()->route('brandPanel')->with('success', "Client created successfully");
     }
 
     /**
@@ -85,8 +90,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        $slider = Slider::find($id);
-        return view('admin.slider.editSlider', compact('slider'));
+        $brand = ClientsBrandWall::find($id);
+        return view('admin.clients.editBrandWall', compact('brand'));
     }
 
     /**
@@ -98,28 +103,32 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $slider = Slider::find($id);
+        $brand = ClientsBrandWall::find($id);
 
-        $slider->title = $request->title;
+        $request->validate([
+            'title' => 'required|max:255',
+            'img' => 'image',
+            'priority' => 'integer|max:10'
+        ]);
 
-        if ($request->file('img')) {
+        $brand->title = $request->title;
+        $brand->priority = $request->priority;
+
+        if( isset($request->file)) {
             $path = Storage::putFile('public', $request->file('img'));
             $url = Storage::url($path);
-            $slider->img = $url;
 
+            $brand->img = $url;
         }
 
-
-        if ($request->checkbox) {
-            $slider->active = true;
+        if( $request->checkbox) {
+            $brand->active = true;
         } else {
-            $slider->active = false;
+            $brand->active = false;
         }
 
-        $slider->update();
-//        $id = $slider->id;
-        return redirect()->route('editSlider', compact('id'))->with('success', 'Editing have done successfully!');
-//        return redirect()->route('sliderPanel')->with('success', "Editing have done successfully!");
+        $brand->update();
+        return redirect()->route('editBrand', compact('id'))->with('success', "Client updated successfully");
     }
 
     /**
@@ -130,8 +139,8 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        $slider = Slider::find($id);
-        $slider->delete();
-        return redirect()->route('sliderPanel');
+        $brand = ClientsBrandWall::find($id);
+        $brand->delete();
+        return redirect()->route('brandPanel');
     }
 }

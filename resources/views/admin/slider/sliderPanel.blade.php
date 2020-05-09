@@ -9,6 +9,9 @@
         <li class="nav-item active">
             <a class="nav-link" href="/admin/slider">Slider panel</a>
         </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="/admin/brandwall">Brand Wall panel</a>
+        </li>
     </ul>
 @endsection
 

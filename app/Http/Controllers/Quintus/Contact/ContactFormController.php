@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Quintus\Ajax;
+namespace App\Http\Controllers\Quintus\Contact;
 
 use App\Http\Controllers\Controller;
 use App\Mail\FeedbackMail;

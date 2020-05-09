@@ -1,6 +1,7 @@
 <?php
 
-use App\Slider;
+use App\Model\Slider;
+use App\Model\ClientsBrandWall;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
 
         factory(Slider::class, 5)->create();
+        factory(ClientsBrandWall::class, 8)->create();
+        factory(\App\Model\Post::class, 10)->create();
+        factory(\App\Model\Category::class, 1)->create();
     }
 }

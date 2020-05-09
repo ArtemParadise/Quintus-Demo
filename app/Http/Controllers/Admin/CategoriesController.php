@@ -1,20 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Slider;
+use App\Model\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AdminPanelController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        return view('admin.admin');
+        $categories = Category::paginate(10);
+        return view('admin.categories.categories_panel', ['categories' => $categories]);
     }
 
     /**
@@ -24,7 +32,7 @@ class AdminPanelController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.createCategory');
     }
 
     /**
@@ -35,7 +43,15 @@ class AdminPanelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|unique:categories|max:50',
+        ]);
+
+        $category = new Category();
+        $category->title = $request->title;
+        $category->save();
+
+        return redirect()->route('categoriesPanel')->with('success', 'Category has been created');
     }
 
     /**
@@ -57,7 +73,8 @@ class AdminPanelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.categories.editCategory', ['category' => $category]);
     }
 
     /**
@@ -69,7 +86,15 @@ class AdminPanelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:50',
+        ]);
+
+        $category = Category::find($id);
+        $category->title = $request->title;
+        $category->update();
+
+        return redirect()->route('editCategory', ['id' => $id])->with('success', "Category has been updated");
     }
 
     /**
@@ -80,6 +105,9 @@ class AdminPanelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+
+        return redirect()->route('categoriesPanel');
     }
 }
